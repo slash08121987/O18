@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>app/update.jpg</file>
+        <file>cols/col9-all-70.jpg</file>
+        <file>mtd/imagen.jpg</file>
+    </qresource>
+</RCC>

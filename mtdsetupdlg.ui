@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>MTDs List Dialog</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>icon/1.ico</normaloff>icon/1.ico</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QWidget" name="widget" native="true">

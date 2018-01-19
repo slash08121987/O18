@@ -86,8 +86,7 @@ O18MainWnd::O18MainWnd(QWidget *parent)
 //#ifdef Q_NO_DEBUG
         //m_iniFileName =  appdir.absolutePath() + "/o18model.ini";
 //#else
-        //m_iniFileName =  QApplication::applicationDirPath() + "/o18model.ini";
-        m_iniFileName = BASE_DIR + "/o18model.ini";
+        m_iniFileName =  QApplication::applicationDirPath() + "/o18model.ini";
 //#endif
 
         for(int i = 0; i != QApplication::arguments().size(); ++i)
@@ -98,30 +97,39 @@ O18MainWnd::O18MainWnd(QWidget *parent)
         }
 
         m_imagenes["begin"] = QPixmap(":/cols/col9-all-70");
+
         m_imagenes["col1-40"] = QPixmap(":/cols/col1-40");
         m_imagenes["col1-hl-40"] = QPixmap(":/cols/col1-hl-40");
         m_imagenes["col1-all-40"] = QPixmap(":/cols/col1-all-40");
+
         m_imagenes["col2-40"] = QPixmap(":/cols/col2-40");
         m_imagenes["col2-hl-40"] = QPixmap(":/cols/col2-hl-40");
         m_imagenes["col2-all-40"] = QPixmap(":/cols/col2-all-40");
+
         m_imagenes["col3-40"] = QPixmap(":/cols/col3-40");
         m_imagenes["col3-hl-40"] = QPixmap(":/cols/col3-hl-40");
         m_imagenes["col3-all-40"] = QPixmap(":/cols/col3-all-40");
+
         m_imagenes["col4-50"] = QPixmap(":/cols/col4-50");
         m_imagenes["col4-hl-50"] = QPixmap(":/cols/col4-hl-50");
         m_imagenes["col4-all-50"] = QPixmap(":/cols/col4-all-50");
+
         m_imagenes["col5-50"] = QPixmap(":/cols/col5-50");
         m_imagenes["col5-hl-50"] = QPixmap(":/cols/col5-hl-50");
         m_imagenes["col5-all-50"] = QPixmap(":/cols/col5-all-50");
+
         m_imagenes["col6-50"] = QPixmap(":/cols/col6-50");
         m_imagenes["col6-hl-50"] = QPixmap(":/cols/col6-hl-50");
         m_imagenes["col6-all-50"] = QPixmap(":/cols/col6-all-50");
+
         m_imagenes["col7-60"] = QPixmap(":/cols/col7-60");
         m_imagenes["col7-hl-60"] = QPixmap(":/cols/col7-hl-60");
         m_imagenes["col7-all-60"] = QPixmap(":/cols/col7-all-60");
+
         m_imagenes["col8-60"] = QPixmap(":/cols/col8-60");
         m_imagenes["col8-hl-60"] = QPixmap(":/cols/col8-hl-60");
         m_imagenes["col8-all-70"] = QPixmap(":/cols/col8-all-70");
+
         m_imagenes["col9-70"] = QPixmap(":/cols/col9-70");
         m_imagenes["col9-hl-70"] = QPixmap(":/cols/col9-hl-70");
         m_imagenes["col9-all-70"] = QPixmap(":/cols/col9-all-70");
@@ -202,12 +210,11 @@ O18MainWnd::O18MainWnd(QWidget *parent)
         sets.setValue("sides_width", sides);
         if( sides >= 0 )
         {
-                ui->wgtLeft->setMinimumWidth(sides);
-                ui->wgtLeft->setMaximumWidth(sides);
+                //ui->wgtLeft->setMinimumWidth(sides);
+                //ui->wgtLeft->setMaximumWidth(sides);
                 ui->wgtRight->setMinimumWidth(sides);
                 ui->wgtRight->setMaximumWidth(sides);
         }
-        ui->TestLabel->setText(BASE_DIR);
         ui->cbFormulaType->setCurrentIndex(m_model.formula_type());
 
         double resPlotOp  = sets.value("ResPlotOpacity", 0.8).toDouble();
@@ -895,8 +902,10 @@ void O18MainWnd::resizeEvent(QResizeEvent* evt)
 {
         QMainWindow::resizeEvent(evt);
         ui->labelTitle_2->setText(ui->labelTitle->text());
+
         ui->labelTitle->move((ui->wgtImage->width() - ui->labelTitle->width()) / 2, 10);
         ui->labelTitle_2->move(ui->labelTitle->geometry().left() + 2, ui->labelTitle->geometry().top() + 2);
+
         ui->labelTitle_2->raise();
         ui->labelTitle->raise();
 }
@@ -1067,11 +1076,14 @@ void O18MainWnd::find_min_max(double& min, double& max, const QVector<double>& d
 }
 
 void O18MainWnd::drawVolApp()
-{
+{           
         double ymin = 0, ymax = 0;
+
         QVector<double> xData;
         QVector<double> yData;
+
         clearTable(*ui->tblVolApp);
+
         for( int theta_index = 0; theta_index != m_model.result().result.size(); ++theta_index )
         {
                 const COneThetaResult& otr = m_model.result().result[theta_index];
@@ -1102,7 +1114,8 @@ void O18MainWnd::drawVolApp()
                 ymin -= fabs(ymax-ymin)/10.;
         }
         ui->tblVolApp->repaint();
-        ui->tblVolApp->setVisible(true);
+        ui->tblVolApp->setVisible(true);     
+
         if( !m_resPlot.isVisible() || m_resPlot.plottableCount() != 1 )
         {
                 QRect rc = ui->wgtImage->geometry();
@@ -1165,7 +1178,9 @@ border-radius: 6px;border-color: rgba(200,200,250, 100);");
                         m_resPlotTitle->setTextColor(CLRPLOTTEXT);
                         m_resPlotTitle->setText(tr("Volume of Apparature"));
                 }
+
         }
+
         QCPAxis& ya = *m_resPlot.yAxis;
         // preparar y eje:
         ya.setRange(ymin, ymax); //default
@@ -1181,6 +1196,8 @@ border-radius: 6px;border-color: rgba(200,200,250, 100);");
                 volApp->setData(xData, yData);
         }
         m_resPlot.replot();
+
+
 }
 
 void O18MainWnd::saveToFile(const QString name)
@@ -1396,6 +1413,7 @@ void O18MainWnd::model_on_step_processed(int , int state)
 
 void O18MainWnd::model_theta_finished(int )
 {
+
         if( m_bClosing )
                 return;
         if( m_resPlot.isVisible() || ui->tabWidget->currentIndex() == 1 )
@@ -1416,33 +1434,41 @@ void O18MainWnd::model_on_finished()
         logMessage("Calculation finished");
         m_resPlot.setVisible(false);
         QTime tm;
-
+        /*
         QMessageBox msg(QMessageBox::Information, tr("Sync data"),
                                         tr("Calculation finished, syncing data.\nPlease, wait a moment..."),
-                                        QMessageBox::NoButton, ui->wgtImage);
-        msg.raise();
-        msg.setIconPixmap(QPixmap(BASE_DIR + "/app/update.jpg"));
+                                        QMessageBox::NoButton);
+        */
+        QMessageBox msg;
+        msg.setIcon(QMessageBox::Information);
+        msg.setStandardButtons(QMessageBox::NoButton);
         msg.setWindowFlags( Qt::FramelessWindowHint );
+        msg.setParent(ui->wgtImage);
+        msg.setIconPixmap(QPixmap(":/app/update.jpg"));
+        msg.setWindowTitle(tr("Sync data"));
+        //msg.setText(tr("Calculation finished, syncing data.\nPlease, wait a moment..."));
         makeOpacity(msg, 0.8);
         msg.setStyleSheet("QWidget{background-color: rgb(0, 0, 0); }"
-"QMessageBox{border-style: solid;border-width: 2px;border-radius: 6px;"
+"QMessageBox{color: rgb(232, 232, 232); border-style: solid;border-width: 2px;border-radius: 6px;"
 "border-color: rgba(200,200,250, 100);}");
+        msg.raise();
         if( !m_model.result().result.empty() &&
                         !m_model.result().result.at(0).colresults.empty())
         {
                 msg.show();
-                msg.repaint();
-                /*
+                msg.repaint();                
                 QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
                 msg.move( (ui->wgtImage->width() - msg.width())/2,
                                   (ui->wgtImage->height() - msg.height())/2 );
                 msg.repaint();
-                QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
-                */
+                QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);             
                 tm.start();
+
         }
+
         ui->btnStartCalc->setText(tr("Start"));
         ui->btnStartCalc->setToolTip(tr("Start calculation"));
+
         if( !m_model.result().result.empty() &&
                         !m_model.result().result.at(0).colresults.empty())
         {
@@ -1456,6 +1482,7 @@ void O18MainWnd::model_on_finished()
         ui->wgtTables->setEnabled(true);
         ui->wgtCtrl->setEnabled(true);
         ui->tabWidget->update();
+
         if(ui->cbResTheta->currentIndex() == 0 )
                 on_cbResTheta_currentIndexChanged(0);
         else
@@ -1465,7 +1492,8 @@ void O18MainWnd::model_on_finished()
                    tm.elapsed() < 3000)
                 QApplication::processEvents(QEventLoop::ExcludeUserInputEvents);
         if( !m_model.result().result.empty() &&
-                        !m_model.result().result.at(0).colresults.empty() && ui->cbAutoSave->isChecked() )
+                        !m_model.result().result.at(0).colresults.empty() &&
+                            ui->cbResAutosave->isChecked())
         {
                 if( m_model.terminated() )
                 {
@@ -1484,6 +1512,8 @@ void O18MainWnd::model_on_finished()
                                                         QDateTime::currentDateTime().toString("O18_yyyy-MM-dd_hh-mm-ss")) );
                 }
         }
+
+
 }
 
 void O18MainWnd::model_on_fatal_error(QString err)

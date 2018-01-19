@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>MTDAddUpdateDlg</class>
  <widget class="QDialog" name="MTDAddUpdateDlg">
@@ -11,6 +12,10 @@
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>icon/1.ico</normaloff>icon/1.ico</iconset>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,0">
    <item>
@@ -28,7 +33,7 @@
          <string notr="true"/>
         </property>
         <property name="pixmap">
-         <pixmap resource="imagenes/o18model.qrc">:/mtd/imagen</pixmap>
+         <pixmap>:/mtd/imagen</pixmap>
         </property>
         <property name="scaledContents">
          <bool>true</bool>
@@ -334,9 +339,7 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="imagenes/o18model.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>btnCanccel</sender>

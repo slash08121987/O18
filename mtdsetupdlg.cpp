@@ -12,6 +12,7 @@ MTDSetupDlg::MTDSetupDlg(QWidget *parent, const mtdevices_t& mtds)
 {
         ui->setupUi(this);
         setWindowFlags( windowFlags() & ~(Qt::WindowContextHelpButtonHint));
+        setFixedSize(QSize(554,354));
         for(size_t i = 0; i != m_devices.size(); ++i)
         {
                 QListWidgetItem* item = create_mtd_item(m_devices[i]);
@@ -102,9 +103,6 @@ QString MTDSetupDlg::create_mtd_text(const MTDevice &mtd)
 }
 QIcon MTDSetupDlg::create_mtd_icon(const MTDevice &mtd)
 {
-        //return QIcon( QPixmap(mtd.image.exists() ? mtd.image.absoluteFilePath() : QString(":/mtd/imagen"))
-        //                          .scaled(ROWHEIGHT, ROWHEIGHT) );
-
-        return QIcon( QPixmap(mtd.image.exists() ? mtd.image.absoluteFilePath() : QString(BASE_DIR + "/mtd/imagen.jpg"))
+        return QIcon( QPixmap(mtd.image.exists() ? mtd.image.absoluteFilePath() : QString(":/mtd/imagen"))
                                   .scaled(ROWHEIGHT, ROWHEIGHT) );
 }

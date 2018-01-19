@@ -16,6 +16,7 @@ MTDAddUpdateDlg::MTDAddUpdateDlg(QWidget *parent,
 {
         ui->setupUi(this);
         setWindowFlags( windowFlags() & ~(Qt::WindowContextHelpButtonHint));
+        setFixedSize(QSize(422,156));
         ui->wgtName->setEnabled(!m_update);
         ui->sbHeight->setValue(mtd.height * 100);
         ui->sbDPressure->setValue(mtd.dpressure * 1000);

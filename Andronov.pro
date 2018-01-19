@@ -7,6 +7,8 @@
 QT       += core gui
 QT       += printsupport
 
+RC_ICONS = icon/o18model.ico
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Andronov
@@ -46,5 +48,7 @@ FORMS += \
     o18mainwnd.ui
 
 DISTFILES += \
-    o18model.ini \
-    mtd/imagen.jpg
+    o18model.ini
+
+RESOURCES += \
+    res.qrc

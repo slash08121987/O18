@@ -3,10 +3,10 @@
 #include <QString>
 #include <QVector>
 #include <QFileInfo>
-static const int COLMAX = 9;
+static const int COLMAX = 10;
 static const int COLCOUNT = COLMAX;
 static const int DEFLAYERSCOUNT = 30;
-static const QString BASE_DIR = "C:/Users/Burygin.vyacheslav/Documents/Andronov";
+
 struct MTDevice
 {
         QString name;
@@ -27,6 +27,7 @@ struct MTDevice
                 return !((*this) == rhs);
         }
 };
+
 struct COneColumnResult
 {
         double theta;
